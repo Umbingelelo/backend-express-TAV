@@ -6,10 +6,17 @@
 
 import { Router } from 'express';
 import ArticleController from '../controllers/ArticleController.js';
+import AuthController from '../controllers/AuthController.js';
+import { authenticateToken } from '../middlewares/authMiddleware.js';
 import OpenRouterService from '../services/OpenRouter.js';
 import Article from '../models/Article.js';
 
 const router = Router();
+
+// Rutas de Autenticación
+router.post('/login', AuthController.login);
+router.post('/register', AuthController.register);
+router.get('/profile', authenticateToken, AuthController.getProfile);
 
 // Rutas de Artículos (CRUD)
 router.get('/articles', ArticleController.index);

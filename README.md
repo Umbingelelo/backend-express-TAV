@@ -97,11 +97,31 @@ Lógica para conectar con servicios externos.
   - `POST /api/articles` -> Crea artículo
   - `POST /api/articles/:id/summarize` -> ✨ **Feature IA**: Resume el artículo usando OpenRouter.
 
-### `src/commands/`
+### 7. Sistema de Autenticación
 
-Scripts que se ejecutan "offline", fuera del servidor web. Útil para tareas programadas (cron jobs) o mantenimiento.
+El proyecto incluye un sistema completo de usuarios con JWT.
 
-## 🧪 Probando la API
+#### Configuración Extra
+
+Asegúrate de agregar `JWT_SECRET` en tu `.env`:
+
+```env
+JWT_SECRET=tu_secreto_super_seguro
+```
+
+#### Endpoints de Autenticación
+
+- `POST /api/register`: Crear cuenta (requiere `name`, `email`, `password`).
+- `POST /api/login`: Iniciar sesión (requiere `email`, `password`). Retorna un token.
+- `GET /api/profile`: Ruta protegida. Requiere header `Authorization: Bearer <TOKEN>`.
+
+### 8. Comandos Útiles
+
+- **Crear migración**: `npx knex migrate:make nombre_migracion`
+- **Correr migraciones**: `npm run db:migrate`
+- **Poblar DB (Seeds)**: `npm run db:seed` (Crea usuarios de prueba: admin@example.com / 123456)
+
+## 📂 Guía del Código
 
 Puedes usar Postman o cURL.
 
